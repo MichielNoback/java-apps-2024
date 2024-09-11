@@ -1,6 +1,6 @@
 package nl.bioinf.nomi.kill_em_all;
 
-class Ninja extends GameCharacter {
+public class Ninja extends GameCharacter {
     public Ninja(String name) {
         super(name);
     }
