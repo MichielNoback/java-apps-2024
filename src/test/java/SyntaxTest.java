@@ -2,12 +2,14 @@ import nl.bioinf.nomi.kill_em_all.Ninja;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-
+//import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import static java.lang.System.out;
 
 public class SyntaxTest {
 
-    @Test
+    @org.junit.jupiter.api.Test
     void dataTypes() {
         // Primitives
         char nuc = 'C';
@@ -112,5 +114,39 @@ public class SyntaxTest {
             }
             if (nucsSeen == nucleotides.length) break;
         }
+    }
+
+    @Test
+    void testIncrements(){
+        int x = 43;
+        int y = 43;
+
+        x += 1;
+        y++;
+
+        for (int i = 0; i < 10; i++){
+
+        }
+        assertEquals(x, y);
+
+    }
+
+    //method overloading; two arguments
+    int add(int x, int y){
+        return x + y;
+    }
+
+    //method overloading; one argument
+    int add(int x) {
+        //extra logic
+        return add(x, 2);
+    }
+
+    //test method overloading
+    @Test
+    void testAdd() {
+        add(2, 3);
+        add(2);
+        out.println();
     }
 }
