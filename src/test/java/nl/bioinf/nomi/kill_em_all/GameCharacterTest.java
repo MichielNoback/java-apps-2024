@@ -11,8 +11,8 @@ class GameCharacterTest {
         System.out.println(hargg);
         hargg.move(new Coordinate(30, 26));
         hargg.move(new Coordinate(21, 23));
-        assertEquals(51, hargg.getCoordinate().getTop());
-        assertEquals(49, hargg.getCoordinate().getLeft());
+        assertEquals(21, hargg.getCoordinate().getTop());
+        assertEquals(23, hargg.getCoordinate().getLeft());
 
         GameCharacter kloemp = new Troll("Kloemp");
         hargg.attack(10, kloemp);

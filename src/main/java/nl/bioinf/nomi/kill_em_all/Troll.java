@@ -8,6 +8,7 @@ public class Troll extends GameCharacter {
 
     @Override
     public void move(Coordinate newCoordinate) {
-
+        //process the move with Troll speed
+        this.setCoordinate(newCoordinate);
     }
 }

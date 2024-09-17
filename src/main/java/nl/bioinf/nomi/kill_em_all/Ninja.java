@@ -14,6 +14,7 @@ public class Ninja extends GameCharacter {
 
     @Override
     public void move(Coordinate newCoordinate) {
-        //process the move with speed
+        //process the move with Ninja speed
+        this.setCoordinate(newCoordinate);
     }
 }

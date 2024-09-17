@@ -4,7 +4,7 @@ public abstract class GameCharacter implements Movable {
     //implements Movable, but is abstract itself.
     //Only subclasses are
     //required to implement the interface
-    private final Coordinate coordinate = new Coordinate();
+    private Coordinate coordinate = new Coordinate();
     private String name;
     private int energyLevel = 100;
 
@@ -18,6 +18,14 @@ public abstract class GameCharacter implements Movable {
 
     public String getName() {
         return name;
+    }
+
+    public void setCoordinate(Coordinate newCoordinate) {
+        if (newCoordinate.getTop() < 0)
+            throw new IllegalArgumentException("coordinates must be positive");
+        if (newCoordinate.getLeft() < 0)
+            throw new IllegalArgumentException("coordinates must be positive");
+        this.coordinate = newCoordinate;
     }
 
     public int getEnergyLevel() {
