@@ -1,8 +1,10 @@
 package nl.bioinf.nomi.kill_em_all;
 
-public class GameCharacter {
-    private double topCoordinate;
-    private double leftCoordinate;
+public abstract class GameCharacter implements Movable {
+    //implements Movable, but is abstract itself.
+    //Only subclasses are
+    //required to implement the interface
+    private final Coordinate coordinate = new Coordinate();
     private String name;
     private int energyLevel = 100;
 
@@ -10,17 +12,8 @@ public class GameCharacter {
         this.name = name;
     }
 
-    public double getTopCoordinate() {
-        return topCoordinate;
-    }
-
-    public double getLeftCoordinate() {
-        return leftCoordinate;
-    }
-
-    void move(double top, double left) {
-        this.topCoordinate += top;
-        this.leftCoordinate += left;
+    public Coordinate getCoordinate(){
+            return coordinate;
     }
 
     public String getName() {
@@ -54,15 +47,12 @@ public class GameCharacter {
         return true;
     }
 
-
     @Override
     public String toString() {
-        return "Ninja{" +
-                "name='" + name + '\'' +
+        return "GameCharacter{" +
+                "coordinate=" + coordinate +
+                ", name='" + name + '\'' +
                 ", energyLevel=" + energyLevel +
-                ", topCoordinate=" + topCoordinate +
-                ", leftCoordinate=" + leftCoordinate +
                 '}';
     }
-
 }

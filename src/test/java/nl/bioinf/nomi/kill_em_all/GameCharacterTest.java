@@ -9,12 +9,12 @@ class GameCharacterTest {
     void testCreateNinja() {
         Ninja hargg = new Ninja("Hargg");
         System.out.println(hargg);
-        hargg.move(30, 26);
-        hargg.move(21, 23);
-        assertEquals(51, hargg.getTopCoordinate());
-        assertEquals(49, hargg.getLeftCoordinate());
+        hargg.move(new Coordinate(30, 26));
+        hargg.move(new Coordinate(21, 23));
+        assertEquals(51, hargg.getCoordinate().getTop());
+        assertEquals(49, hargg.getCoordinate().getLeft());
 
-        GameCharacter kloemp = new GameCharacter("Kloemp");
+        GameCharacter kloemp = new Troll("Kloemp");
         hargg.attack(10, kloemp);
 
         assertEquals(90, hargg.getEnergyLevel());
@@ -31,7 +31,7 @@ class GameCharacterTest {
     @Test
     void testRepeatedAttack() {
         Ninja hargg = new Ninja("Hargg");
-        GameCharacter kloemp = new GameCharacter("Kloemp");
+        GameCharacter kloemp = new Troll("Kloemp");
         for (int i = 0; i < 6; i++) {
             hargg.attack(25, kloemp);
             System.out.println("hargg = " + hargg);
