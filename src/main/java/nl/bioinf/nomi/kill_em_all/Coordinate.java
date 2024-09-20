@@ -21,8 +21,10 @@ public class Coordinate {
     }
 
     public double getDistance(Coordinate other) {
-        //TODO
-        throw new IllegalStateException("Not implemented yet");
+        return Math.sqrt(
+                Math.pow(other.getLeft() - this.getLeft(), 2) +
+                Math.pow(other.getTop() - this.getTop(), 2)
+        );
     }
 
     @Override

@@ -7,6 +7,7 @@ public abstract class GameCharacter implements Movable {
     private Coordinate coordinate = new Coordinate();
     private String name;
     private int energyLevel = 100;
+    private double attackRange = 5.0;
 
     public GameCharacter(String name) {
         this.name = name;
@@ -39,12 +40,25 @@ public abstract class GameCharacter implements Movable {
         this.energyLevel = energyLevel;
     }
 
+    public void setAttackRange(double range) {
+        this.attackRange = range;
+    }
 
     void attack(int power, GameCharacter opponent) {
-        if (drainEnergy(power)) {
+        double distance = this.getDistanceToCharacter(opponent);
+        // Check if opponent is within attack range and enough power is remaining
+        if (distance <= this.attackRange & drainEnergy(power)) {
             //but has double effect on its opponent
             opponent.drainEnergy(power * 2);
+        } else if (distance > this.attackRange) {
+            System.out.println(opponent.getName() + " is out of range!");
+        } else if (this.energyLevel - power < 0) {
+            System.out.println(this.getName() + " has not enough power left!");
         }
+    }
+
+    public double getDistanceToCharacter(GameCharacter character) {
+        return this.coordinate.getDistance(character.getCoordinate());
     }
 
     public boolean drainEnergy(int power) {
