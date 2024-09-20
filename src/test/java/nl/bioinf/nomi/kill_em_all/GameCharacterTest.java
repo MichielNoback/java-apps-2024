@@ -77,4 +77,16 @@ class GameCharacterTest {
         kloemp.move(new Coordinate(15, 20));
         assert(kloempPosition.equals(kloemp.getCoordinate()));
     }
+
+    @Test
+    public void testSelfAttack() {
+        GameCharacter kloemp = new Troll("Kloemp");
+        kloemp.attack(10, kloemp); // Not allowed, damage ignored
+
+        GameCharacter clone = new Troll("Kloemp");
+        kloemp.attack(10, clone); // Name and coordinate the same? same character
+
+        assertEquals(100, kloemp.getEnergyLevel());
+        assertEquals(100, clone.getEnergyLevel());
+    }
 }

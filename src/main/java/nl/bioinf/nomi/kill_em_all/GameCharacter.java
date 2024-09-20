@@ -1,5 +1,7 @@
 package nl.bioinf.nomi.kill_em_all;
 
+import java.util.Objects;
+
 public abstract class GameCharacter implements Movable {
     //implements Movable, but is abstract itself.
     //Only subclasses are
@@ -45,6 +47,10 @@ public abstract class GameCharacter implements Movable {
     }
 
     void attack(int power, GameCharacter opponent) {
+        if (this.equals(opponent)) {
+            System.out.println("Not allowed to attack yourself!");
+            return;
+        }
         double distance = this.getDistanceToCharacter(opponent);
         // Check if opponent is within attack range and enough power is remaining
         if (distance <= this.attackRange & drainEnergy(power)) {
@@ -67,6 +73,19 @@ public abstract class GameCharacter implements Movable {
         //energy is drawn from its own reserve for an attack
         this.energyLevel -= power;
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        GameCharacter that = (GameCharacter) o;
+        return Objects.equals(coordinate, that.coordinate) && Objects.equals(name, that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(coordinate, name);
     }
 
     @Override
