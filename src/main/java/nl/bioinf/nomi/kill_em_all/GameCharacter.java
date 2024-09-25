@@ -1,5 +1,8 @@
 package nl.bioinf.nomi.kill_em_all;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Objects;
 
 public abstract class GameCharacter implements Movable {
@@ -10,6 +13,7 @@ public abstract class GameCharacter implements Movable {
     private String name;
     private int energyLevel = 100;
     private double attackRange = 5.0;
+    private static final Logger logger = LogManager.getLogger(GameCharacter.class.getName());
 
     public GameCharacter(String name) {
         this.name = name;
@@ -48,7 +52,7 @@ public abstract class GameCharacter implements Movable {
 
     void attack(int power, GameCharacter opponent) {
         if (this.equals(opponent)) {
-            System.out.println("Not allowed to attack yourself!");
+            logger.warn("Not allowed to attack yourself!");
             return;
         }
         double distance = this.getDistanceToCharacter(opponent);
@@ -57,9 +61,9 @@ public abstract class GameCharacter implements Movable {
             //but has double effect on its opponent
             opponent.drainEnergy(power * 2);
         } else if (distance > this.attackRange) {
-            System.out.println(opponent.getName() + " is out of range!");
+            logger.warn("{} is out of range!", opponent.getName());
         } else if (this.energyLevel - power < 0) {
-            System.out.println(this.getName() + " has not enough power left!");
+            logger.warn("{} has not enough power left!", this.getName());
         }
     }
 

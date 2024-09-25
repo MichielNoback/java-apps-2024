@@ -2,6 +2,8 @@ package nl.bioinf.nomi.kill_em_all;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class GameTest {
 
     @Test
@@ -26,6 +28,21 @@ public class GameTest {
         game.addCommand(new MoveCommand(hargg, new Coordinate(3, 8)));
         game.addCommand(new AttackCommand(hargg, kloemp, 10));
         game.addCommand(new MoveCommand(hargg, new Coordinate(3, 8)));
+        game.turn();
+    }
+
+    @Test
+    public void testIllegalMoveOperation() {
+        Ninja hargg = new Ninja("Hargg");
+
+        // Moving to negative coordinates or setting negative energy levels
+        // should throw IllegalArgumentException
+        assertThrows(IllegalArgumentException.class, () -> hargg.move(new Coordinate(-100, 10)));
+        assertThrows(IllegalArgumentException.class, () -> hargg.setEnergyLevel(-100));
+
+        // GameLoop however should catch errors and print ERROR log
+        GameLoop game = new GameLoop();
+        game.addCommand(new MoveCommand(hargg, new Coordinate(-100, 10)));
         game.turn();
     }
 }
