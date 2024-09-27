@@ -1,5 +1,8 @@
 package nl.bioinf.nomi;
 
+
+import picocli.CommandLine;
+
 import java.util.Arrays;
 
 /**
@@ -19,9 +22,8 @@ public class Main {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("args = " + Arrays.toString(args));
-        Main app = new Main(3);
-        app.start(args);
+        int exitCode = new CommandLine(new CommandlineProcessor()).execute(args);
+        System.exit(exitCode);
     }
 
     /**
